@@ -20,11 +20,10 @@ document.getElementById('current-1').textContent = '0';
 document.getElementById("name-0").textContent = "Player 1";
 document.getElementById("name-1").textContent = "Player 2";
 // Winner classiig avch hayah heregtei
-document.querySelector(".player-1-panel").classList.remove('winner');
 document.querySelector(".player-0-panel").classList.remove('winner');
-document.querySelector(".player-0-panel").classList.remove('active');
-document.querySelector(".player-1-panel").classList.remove('active');
+document.querySelector(".player-1-panel").classList.remove('winner');
 document.querySelector(".player-0-panel").classList.add('active');
+document.querySelector(".player-1-panel").classList.remove('active');
 
 diceDom.style.display = "none";
 }
@@ -68,11 +67,19 @@ document.querySelector(".btn-hold").addEventListener('click',function(){
         }
 });
 
-// Ene functio ni togloh eeljiig daraachiin toglogchruu shiljuulne.
+// Ene function ni togloh eeljiig daraachiin toglogchruu shiljuulne.
 function switchToNextPlayer(){
+    // Toglogchiin eeljiig onoog 0 bolgono.
+    roundScore = 0;
      // Toglogchiin eeljiig nuguu toglogchruu shiljuulne.
+    document.getElementById("current-" + activePlayer).textContent = 0;
+
+    //  Toglogchiiin eeljiig nuguu toglogchruu shiljuulne.
+    activePlayer === 0 ? (activePlayer = 1) : (activePlayer = 0);
     // Ulaan tsegiig shiljuuleh
-    document.querySelector(".player-" + activePlayer +"-panel").classList.toggle("active");
+    document.querySelector(".player-0-panel").classList.toggle("active");
+    document.querySelector(".player-1-panel").classList.toggle("active");
+    // document.querySelector(".player-1-panel").classList.toggle("active");
     // Shoog tur alga bolgono.
     diceDom.style.display = "none";
 }
