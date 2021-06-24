@@ -68,7 +68,7 @@ document.querySelector(".btn-hold").addEventListener('click',function(){
     // Delgets deer onoog ni uurchilnu
     document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
         // Ug toglogch hojson esehiig (Onoo ni 100-s ih eseh )shalgah
-        if (scores[activePlayer] >= 20){
+        if (scores[activePlayer] >= 100){
             // Togloomiig duussan tuluvt oruulna
             isNewGame = false;
             // Yalagch gesen textig nerniih ni orond gargana
