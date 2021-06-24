@@ -1,3 +1,6 @@
+// Togloom duussan esehiig hadgalah tuvuliin huvisagch
+var isNewGame;
+
 // Togloomiin buh gazar ashiglagdah global huvisagchdiig end zarlana.
 var activePlayer, scores, roundScore;
 // Shoonii zurgiig uzuuleh elemtiig DOM-oos haij olood end hadgalna.
@@ -6,12 +9,15 @@ var diceDom = document.querySelector('.dice')
 initGame();
 // Togloomiig shineer ehlehed ashiglah function
 function initGame(){
+    // Togloom ehellee gedeg tuluvt oruulna
+    isNewGame = true;
+    // Toglogchiin eeljiig hadgalah huvisagch
     activePlayer =0;
-//  Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
+    //  Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
     scores = [0, 0];
-//  Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалах хувьсагч
+    //  Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалах хувьсагч
     roundScore = 0;
-// Prepare for programm
+    // Prepare for programm
 document.getElementById("score-0").textContent = '0';
 document.getElementById("score-1").textContent = '0';
 document.getElementById('current-0').textContent = '0';
@@ -29,7 +35,8 @@ diceDom.style.display = "none";
 }
 // Shoog shideh event listener
 document.querySelector('.btn-roll').addEventListener('click', function (){
-    // 1 - 6 dotorh sanamsargui neg too gargaj avna
+    if (isNewGame){
+            // 1 - 6 dotorh sanamsargui neg too gargaj avna
     var diceNumber = Math.floor(Math.random() * 6) + 1;
 
     // Shoonii zurgiig web deer gargaj irne.
@@ -47,16 +54,23 @@ document.querySelector('.btn-roll').addEventListener('click', function (){
         // Ene toglogchiin eeljindee tsugluulsan onoog 0 bolgono. 
         switchToNextPlayer();
     }    
+    }else{
+        alert('Togloom duussan baina. New Game tovchiig darj shineer ehluulne uu!')
+    }
+
 });
 
 // Toglogchiin tsugluulj baigaa onoog uguh
 document.querySelector(".btn-hold").addEventListener('click',function(){
-    // Ug toglogchiin tsugluulsan eeljni onoog global onoon deer ni nemj ugnu.
+    if(isNewGame){
+         // Ug toglogchiin tsugluulsan eeljni onoog global onoon deer ni nemj ugnu.
     scores[activePlayer] = scores[activePlayer] + roundScore;
     // Delgets deer onoog ni uurchilnu
     document.getElementById("score-" + activePlayer).textContent = scores[activePlayer];
         // Ug toglogch hojson esehiig (Onoo ni 100-s ih eseh )shalgah
         if (scores[activePlayer] >= 20){
+            // Togloomiig duussan tuluvt oruulna
+            isNewGame = false;
             // Yalagch gesen textig nerniih ni orond gargana
             document.getElementById("name-" + activePlayer).textContent = "WINNER!!!";
             document.querySelector(".player-" + activePlayer + "-panel").classList.add('winner');
@@ -65,6 +79,9 @@ document.querySelector(".btn-hold").addEventListener('click',function(){
             // Toglogchiin eeljiig solino.
             switchToNextPlayer();
         }
+    }else{
+        alert('Togloom duussan baina')
+    }
 });
 
 // Ene function ni togloh eeljiig daraachiin toglogchruu shiljuulne.
