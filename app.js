@@ -1,25 +1,33 @@
-//  Тоглогчийн ээлжийг хадгалх хувьсагч, 1 player = 0, 2 player = 1 гэж нэрлье.
-var activePlayer = 0;
-
+// Togloomiin buh gazar ashiglagdah global huvisagchdiig end zarlana.
+var activePlayer, scores, roundScore;
+// Shoonii zurgiig uzuuleh elemtiig DOM-oos haij olood end hadgalna.
+var diceDom = document.querySelector('.dice')
+// Togloomiig ehluulne
+initGame();
+// Togloomiig shineer ehlehed ashiglah function
+function initGame(){
+    activePlayer =0;
 //  Тоглогчийн цуглуулсан оноог хадгалах хувьсагч
-var scores = [0, 0];
-
+    scores = [0, 0];
 //  Тоглогчийн ээлжиндээ цуглуулж байгаа оноог хадгалах хувьсагч
-var roundScore = 0;
-
-//  Шооны аль талаараа буусныг хадгалах хувьсагч хэрэгтэй, 1-6 гэсэн утгыг энэ хувьсагчид санамсаргүйгээр үүсгэж өгнө.
-var diceNumber = Math.floor(Math.random() * 6) + 1;
-
+    roundScore = 0;
 // Prepare for programm
 document.getElementById("score-0").textContent = '0';
 document.getElementById("score-1").textContent = '0';
-
 document.getElementById('current-0').textContent = '0';
 document.getElementById('current-1').textContent = '0';
+// Toglogchdiin neriig butsaaj gargah
+document.getElementById("name-0").textContent = "Player 1";
+document.getElementById("name-1").textContent = "Player 2";
+// Winner classiig avch hayah heregtei
+document.querySelector(".player-1-panel").classList.remove('winner');
+document.querySelector(".player-0-panel").classList.remove('winner');
+document.querySelector(".player-0-panel").classList.remove('active');
+document.querySelector(".player-1-panel").classList.remove('active');
+document.querySelector(".player-0-panel").classList.add('active');
 
-var diceDom = document.querySelector('.dice')
 diceDom.style.display = "none";
-
+}
 // Shoog shideh event listener
 document.querySelector('.btn-roll').addEventListener('click', function (){
     // 1 - 6 dotorh sanamsargui neg too gargaj avna
@@ -62,24 +70,12 @@ document.querySelector(".btn-hold").addEventListener('click',function(){
 
 // Ene functio ni togloh eeljiig daraachiin toglogchruu shiljuulne.
 function switchToNextPlayer(){
-     // Ene toglogchiin eeljindee tsugluulsan onoog 0 bolgono. 
-    roundScore = 0;
-    document.getElementById("current-" + activePlayer).textContent = 0;
-
-      // Toglogchiin eeljiig nuguu toglogchruu shiljuulne.
-
-      // Herev idevhitei toglogch ni 0 baival idehvhitei toglogchiig 1 bolgo
-      // Ugui bol idevhitei toglogch ni 0 bolgo.
-    activePlayer === 0 ? activePlayer = 1 : activePlayer = 0;
-      // Ulaan tsegiig shiljuuleh
-    document.querySelector(".player-0-panel").classList.toggle("active");
-    document.querySelector(".player-1-panel").classList.toggle("active");
-
-      // Shoog tur alga bolgono.
+     // Toglogchiin eeljiig nuguu toglogchruu shiljuulne.
+    // Ulaan tsegiig shiljuuleh
+    document.querySelector(".player-" + activePlayer +"-panel").classList.toggle("active");
+    // Shoog tur alga bolgono.
     diceDom.style.display = "none";
 }
 
 // New Game ehluuleh tovchnii even listener.
-document.querySelector('.btn-new').addEventListener('click',function(){
-    alert('clicked');
-});
+document.querySelector('.btn-new').addEventListener('click',initGame);
